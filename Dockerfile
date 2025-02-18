@@ -1,7 +1,5 @@
 # first stage: build kwkhtmltopdf_server
 
-ARG TARGETARCH
-
 FROM docker.io/golang:1.23.3
 WORKDIR /tmp
 COPY server/kwkhtmltopdf_server.go .
@@ -10,6 +8,8 @@ RUN go build kwkhtmltopdf_server.go
 # second stage: server with wkhtmltopdf
 
 FROM docker.io/ubuntu:22.04
+
+ARG TARGETARCH
 
 RUN set -x \
   && apt update \
